@@ -184,18 +184,20 @@ export class TelegramTypedBot extends TelegramBot {
      */
     public waitResponse(msg: Message, timeout: number = this.responseTimeout): (msg: Message) => Promise<Message> {
         return (response: Message) => {
-            var ticket = ''
+            var ticket = '';
             return new Promise<Message>((resolve, reject) => {
                 ticket = this.getTicketFromMessage(msg)
                 this.addToWaiting(ticket, resolve)
             })
-            .cancellable()
-            .timeout(timeout)
-            .catch(Promise.TimeoutError, err => {
-                if (ticket !== '') this.removeFromWaiting(ticket)
-                throw err
-                return err
-            })
+                .cancellable()
+                .timeout(timeout)
+                .catch(Promise.TimeoutError, err => {
+                    if (ticket !== '')
+                        this.removeFromWaiting(ticket)
+
+                    throw err;
+                    return err;
+                });
         }
     }
 
