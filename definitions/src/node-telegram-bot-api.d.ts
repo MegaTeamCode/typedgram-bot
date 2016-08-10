@@ -458,17 +458,33 @@ interface IKeyboard {
     selective?: boolean
 }
 
+interface IInlineKeyboardMarkup
+{
+    inline_keyboard: InlineKeyboardButton[][];
+}
+
+interface InlineKeyboardButton
+{
+    text: string;
+
+    url: string;
+
+    callback_data: string;
+
+    switch_inline_query: string;
+}
+
 /**
  * This object represents a custom keyboard with reply options.
  * See Introduction to bots for details and examples: https://core.telegram.org/bots#keyboards
  */
 interface IReplyKeyboardMarkup extends IKeyboard {
     /**
-     * Array of button rows, each represented by an Array of Strings
+     * Array of button rows, each represented by an Array of IKeyboardButton
      *
-     * @type string[][]
+     * @type IKeyboardButton[][]
      */
-    keyboard: string[][]
+    keyboard: IKeyboardButton[][];
 
     /**
      * Requests clients to resize the keyboard vertically for optimal fit
@@ -478,7 +494,7 @@ interface IReplyKeyboardMarkup extends IKeyboard {
      *
      * @type boolean
      */
-    resize_keyboard?: boolean
+    resize_keyboard?: boolean;
 
     /**
      * Requests clients to hide the keyboard as soon as it's been used.
@@ -487,7 +503,16 @@ interface IReplyKeyboardMarkup extends IKeyboard {
      *
      * @type boolean
      */
-    one_time_keyboard?: boolean
+    one_time_keyboard?: boolean;
+}
+
+interface IKeyboardButton
+{
+    text: string;
+
+    request_contact: boolean;
+
+    request_location: boolean;
 }
 
 /**
@@ -533,9 +558,9 @@ interface IReplyOptions {
      * Additional interface options.
      * A JSON-serialized object for a custom reply keyboard, instructions to hide keyboard or to force a reply from the user.
      *
-     * @type IReplyKeyboardMarkup | IReplyKeyboardHide | IForceReply
+     * @type IInlineKeyboardMarkup | IReplyKeyboardMarkup | IReplyKeyboardHide | IForceReply
      */
-    reply_markup?: IReplyKeyboardMarkup | IReplyKeyboardHide | IForceReply | string
+    reply_markup?: IInlineKeyboardMarkup | IReplyKeyboardMarkup | IReplyKeyboardHide | IForceReply | string
 }
 
 interface ISendMessageOptions extends IReplyOptions {
