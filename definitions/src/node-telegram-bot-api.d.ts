@@ -465,13 +465,13 @@ interface IInlineKeyboardMarkup
 
 interface IInlineKeyboardButton
 {
-    text: string;
+    text?: string;
 
-    url: string;
+    url?: string;
 
-    callback_data: string;
+    callback_data?: string;
 
-    switch_inline_query: string;
+    switch_inline_query?: string;
 }
 
 /**
