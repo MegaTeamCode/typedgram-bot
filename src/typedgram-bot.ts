@@ -182,7 +182,10 @@ export class TelegramTypedBot extends TelegramBot {
      * @param  {number =   this.responseTimeout} timeout Reject this operation after a timeout in milliseconds.
      * @return {Promise<Message>}        A promise with the user write-back message.
      */
-    public waitResponse(msg: Message, timeout: number = this.responseTimeout): (msg: Message) => Promise<Message> {
+    public waitResponse(msg: Message, timeout?: number): (msg: Message) => Promise<Message> {
+        if(!timeout){
+            timeout = this.responseTimeout;
+        }
         return (response: Message) => {
             var ticket = '';
             return new Promise<Message>((resolve, reject) => {
