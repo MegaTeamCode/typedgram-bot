@@ -460,10 +460,10 @@ interface IKeyboard {
 
 interface IInlineKeyboardMarkup
 {
-    inline_keyboard: InlineKeyboardButton[][];
+    inline_keyboard: IInlineKeyboardButton[][];
 }
 
-interface InlineKeyboardButton
+interface IInlineKeyboardButton
 {
     text: string;
 
